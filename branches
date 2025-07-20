@@ -1,12 +1,27 @@
-return {
-    {
-        name = "Rat",
-        id = 104525136565640,
-        sound = "https://github.com/Solary-3/Scripts/blob/Audios-1/rat.mp3?raw=true"
-    },
-    {
-        name = "Griddy",
-        id = 12887652370,
-        sound = "https://github.com/Solary-3/Scripts/blob/Audios-1/griddy.mp3?raw=true"
-    }
-}
+return function(scroll)
+   print(scroll.Name)
+end)
+
+local anim = AnimatorModule.new(rig, dance.id)
+            local toggleFlag = Instance.new("BoolValue")
+
+            local btn = Instance.new("TextButton", scroll)
+            btn.Size = UDim2.new(1, -10, 0, 44)
+            btn.Text = dance.name
+            btn.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
+            btn.TextColor3 = Color3.new(0, 0, 0)
+            btn.Font = Enum.Font.SourceSansBold
+            btn.TextSize = 16
+            scroll.CanvasSize = UDim2.new(0, 0, 0, i * 48 + 48)
+
+            toggleFlag.Value = false
+            toggleFlag.Parent = btn
+
+            btn.MouseButton1Click:Connect(function()
+                toggleFlag.Value = not toggleFlag.Value
+                if toggleFlag.Value then
+                    anim:Play()
+                else
+                    anim:Stop()
+                end
+            end)
