@@ -1,6 +1,6 @@
 return function(scroll)
    print(scroll.Name)
-end)
+end
 
 local anim = AnimatorModule.new(rig, dance.id)
             local toggleFlag = Instance.new("BoolValue")
