@@ -1,1 +1,147 @@
+-- 🛡 Prevent duplicate loads
+if _G.DanceLoaded then return end
+_G.DanceLoaded = true
 
+local player = game.Players.LocalPlayer
+local UIS = game:GetService("UserInputService")
+local savedUIs = {}
+local AnimatorModule = getgenv().Animator
+
+-- 🌐 Load Animator if missing
+if not AnimatorModule then
+    local success, mod = pcall(function()
+        return loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
+    end)
+    if success then
+        getgenv().Animator = mod
+        AnimatorModule = mod
+    else
+        warn("❌ Failed to load Animator")
+        return
+    end
+end
+
+-- 💾 Backup UI
+local gui = player:WaitForChild("PlayerGui")
+for _, child in ipairs(gui:GetChildren()) do
+    if child:IsA("ScreenGui") then
+        savedUIs[child.Name] = child:Clone()
+    end
+end
+
+-- 🎬 Reanimation
+task.spawn(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/somethingsimade/CurrentAngleV2/refs/heads/main/v2"))()
+end)
+
+-- 🔁 Restore UI
+local function restoreUI()
+    local gui = player:WaitForChild("PlayerGui")
+    for name, clone in pairs(savedUIs) do
+        if not gui:FindFirstChild(name) then
+            clone:Clone().Parent = gui
+        end
+    end
+end
+
+-- 💃 Build Dance UI
+local function buildUI()
+    local gui = player:WaitForChild("PlayerGui")
+    if gui:FindFirstChild("DanceUI") then return end
+
+    local screenGui = Instance.new("ScreenGui", gui)
+    screenGui.Name = "DanceUI"
+    screenGui.ResetOnSpawn = false
+
+    local toggleButton = Instance.new("TextButton", screenGui)
+    toggleButton.Size = UDim2.new(0, 120, 0, 36)
+    toggleButton.Position = UDim2.new(0, 14, 0, 14)
+    toggleButton.Text = "Toggle Dance UI"
+    toggleButton.BackgroundColor3 = Color3.fromRGB(80, 80, 200)
+    toggleButton.TextColor3 = Color3.new(1, 1, 1)
+    toggleButton.Font = Enum.Font.SourceSansBold
+    toggleButton.TextSize = 18
+    toggleButton.Draggable = true
+
+    local danceFrame = Instance.new("Frame", screenGui)
+    danceFrame.Size = UDim2.new(0, 240, 0, 340)
+    danceFrame.Position = UDim2.new(0, 140, 0, 14)
+    danceFrame.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
+    danceFrame.Visible = false
+    danceFrame.Active = true
+
+    toggleButton.MouseButton1Click:Connect(function()
+        danceFrame.Visible = not danceFrame.Visible
+    end)
+
+    local contentFrame = Instance.new("Frame", danceFrame)
+    contentFrame.Size = UDim2.new(1, 0, 1, -20)
+    contentFrame.Position = UDim2.new(0, 0, 0, 20)
+    contentFrame.BackgroundColor3 = Color3.fromRGB(220, 220, 220)
+    contentFrame.Active = true
+
+    local scroll = Instance.new("ScrollingFrame", contentFrame)
+    scroll.Size = UDim2.new(1, 0, 1, 0)
+    scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+    scroll.BackgroundTransparency = 1
+    scroll.ScrollBarThickness = 6
+    scroll.BorderSizePixel = 0
+    scroll.Active = true
+
+    local uils = Instance.new("UIListLayout", scroll)
+
+    local dragI = Instance.new("UIDragDetector", contentFrame)
+    local dragII = Instance.new("UIDragDetector", toggleButton)
+
+    -- 📦 List of dances
+    local dances = {
+        { name = "Rat", id = 104525136565640 },
+        { name = "Griddy", id = 12887652370 },
+        { name = "Slick", id = 16554002009 }
+    }
+
+    -- 🔁 Create each button as a standalone block
+    for i, dance in ipairs(dances) do
+        local rig = workspace:FindFirstChild(player.Name.."_Fake") or workspace:FindFirstChild("CloneCharacter")
+        if rig then
+            local anim = AnimatorModule.new(rig, dance.id)
+            local toggleFlag = Instance.new("BoolValue")
+
+            local btn = Instance.new("TextButton", scroll)
+            btn.Size = UDim2.new(1, -10, 0, 44)
+            btn.Position = UDim2.new(0, 5, 0, (i - 1) * 48)
+            btn.Text = dance.name
+            btn.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
+            btn.TextColor3 = Color3.new(0, 0, 0)
+            btn.Font = Enum.Font.SourceSansBold
+            btn.TextSize = 16
+            scroll.CanvasSize = UDim2.new(0, 0, 0, i * 48 + 48)
+
+            toggleFlag.Value = false
+            toggleFlag.Parent = btn
+
+            btn.MouseButton1Click:Connect(function()
+                toggleFlag.Value = not toggleFlag.Value
+                if toggleFlag.Value then
+                    anim:Play()
+                else
+                    anim:Stop()
+                end
+            end)
+        end
+    end
+end
+
+-- 🕰️ Wait for rig then build
+repeat task.wait() until workspace:FindFirstChild(player.Name.."_Fake") or workspace:FindFirstChild("CloneCharacter")
+task.wait(1)
+restoreUI()
+buildUI()
+
+-- ♻️ Rebuild on respawn
+player.CharacterAdded:Connect(function()
+    repeat task.wait() until workspace:FindFirstChild(player.Name.."_Fake") or workspace:FindFirstChild("CloneCharacter")
+    task.wait(1)
+    restoreUI()
+    buildUI()
+end)
