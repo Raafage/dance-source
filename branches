@@ -1,1 +1,12 @@
-
+return {
+    {
+        name = "Rat",
+        id = 104525136565640,
+        sound = "https://github.com/Solary-3/Scripts/blob/Audios-1/rat.mp3?raw=true"
+    },
+    {
+        name = "Griddy",
+        id = 12887652370,
+        sound = "https://github.com/Solary-3/Scripts/blob/Audios-1/griddy.mp3?raw=true"
+    }
+}
