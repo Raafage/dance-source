@@ -90,8 +90,8 @@ local function buildUI()
 
     local uils = Instance.new("UIListLayout", scroll)
 
-    local dragI = Instance.new("UIDragDetector", contentFrame)
-    local dragII = Instance.new("UIDragDetector", toggleButton)
+    --local dragI = Instance.new("UIDragDetector", contentFrame)
+    --local dragII = Instance.new("UIDragDetector", toggleButton)
 
     -- 📦 List of dances
     local dances = {
