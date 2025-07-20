@@ -1,16 +1,45 @@
-return function(scroll)
+return function(scroll, rig)
+   local name = "Rat"
    local AnimatorModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
-   local anim = AnimatorModule.new(rig, dance.id)
+   local anim = AnimatorModule.new(rig, 104525136565640)
    local toggleFlag = Instance.new("BoolValue")
 
    local btn = Instance.new("TextButton", scroll)
    btn.Size = UDim2.new(1, -10, 0, 44)
-   btn.Text = dance.name
+   btn.Text = name
    btn.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
    btn.TextColor3 = Color3.new(0, 0, 0)
    btn.Font = Enum.Font.SourceSansBold
    btn.TextSize = 16
-   scroll.CanvasSize = UDim2.new(0, 0, 0, i * 48 + 48)
+
+   toggleFlag.Value = false
+   toggleFlag.Parent = btn
+
+   btn.MouseButton1Click:Connect(function()
+         toggleFlag.Value = not toggleFlag.Value
+         if toggleFlag.Value then
+            anim:Play()
+         else
+            anim:Stop()
+         end
+   end)
+
+
+
+
+
+local name = "Griddy"
+   local AnimatorModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
+   local anim = AnimatorModule.new(rig, 123456789012)
+   local toggleFlag = Instance.new("BoolValue")
+
+   local btn = Instance.new("TextButton", scroll)
+   btn.Size = UDim2.new(1, -10, 0, 44)
+   btn.Text = name
+   btn.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
+   btn.TextColor3 = Color3.new(0, 0, 0)
+   btn.Font = Enum.Font.SourceSansBold
+   btn.TextSize = 16
 
    toggleFlag.Value = false
    toggleFlag.Parent = btn
