@@ -97,7 +97,7 @@ local function buildUI()
     local dances = {
         { name = "Rat", id = 104525136565640 },
         { name = "Griddy", id = 12887652370 },
-        { name = "Slick", id = 16554002009 }
+        { name = "Slick", id = 16554002009 },
     }
 
     -- 🔁 Create each button as a standalone block
@@ -109,7 +109,6 @@ local function buildUI()
 
             local btn = Instance.new("TextButton", scroll)
             btn.Size = UDim2.new(1, -10, 0, 44)
-            btn.Position = UDim2.new(0, 5, 0, (i - 1) * 48)
             btn.Text = dance.name
             btn.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
             btn.TextColor3 = Color3.new(0, 0, 0)
