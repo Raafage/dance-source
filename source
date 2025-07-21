@@ -16,7 +16,7 @@ local dances = {
 local animations = {}
 local currentTrack, currentDanceID
 
--- Backup existing UI
+--backup ui
 local gui = player:WaitForChild("PlayerGui")
 for _, child in ipairs(gui:GetChildren()) do
     if child:IsA("ScreenGui") then
@@ -24,17 +24,16 @@ for _, child in ipairs(gui:GetChildren()) do
     end
 end
 
--- Load reanimation
+--load reanimate
 task.spawn(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/somethingsimade/CurrentAngleV2/refs/heads/main/v2"))()
 end)
 
--- Load Animator
+--load animator 
 if not getgenv().Animator then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
 end
 
--- Restore UI
 local function restoreUI()
     local gui = player:WaitForChild("PlayerGui")
     for name, clone in pairs(savedUIs) do
@@ -44,7 +43,7 @@ local function restoreUI()
     end
 end
 
--- Build Dance UI
+--ui builder
 local function buildUI()
     local gui = player:WaitForChild("PlayerGui")
     if gui:FindFirstChild("DanceUI") then return end
@@ -55,7 +54,6 @@ local function buildUI()
     screenGui.Parent = gui
     screenGui.DisplayOrder = 999999999
 
-    -- Main Panel
     local canvasGroup = Instance.new("Frame", screenGui)
     canvasGroup.Size = UDim2.new(0, 240, 0, 340)
     canvasGroup.Position = UDim2.new(0, 140, 0, 14)
@@ -74,7 +72,6 @@ local function buildUI()
     shadow.Image = "rbxassetid://8697780388"
     shadow.ZIndex = 0
 
-    -- Top Bar
     local topBar = Instance.new("Frame", canvasGroup)
     topBar.Size = UDim2.new(1, 0, 0.272, 0)
     topBar.Position = UDim2.new(0, 0, 0, 0)
@@ -84,7 +81,6 @@ local function buildUI()
     local topCorner = Instance.new("UICorner", topBar)
     topCorner.CornerRadius = UDim.new(0, 8)
 
-    -- Close Button
     local closeBtn = Instance.new("TextButton", topBar)
     closeBtn.Size = UDim2.new(0, 24, 0, 24)
     closeBtn.Position = UDim2.new(0.879, 0, 0.013, 0)
@@ -100,7 +96,6 @@ local function buildUI()
         canvasGroup.Visible = false
     end)
 
-    -- Decorative Bar
     local decorBar = Instance.new("Frame", canvasGroup)
     decorBar.Size = UDim2.new(0, 240, 0, 6)
     decorBar.Position = UDim2.new(0, 0, 0.094, 0)
@@ -108,7 +103,6 @@ local function buildUI()
     decorBar.BorderSizePixel = 0
     decorBar.ZIndex = 2
 
-    -- Scroll Frame
     local scroll = Instance.new("ScrollingFrame", canvasGroup)
     scroll.BackgroundTransparency = 0
     scroll.BackgroundColor3 = Color3.fromRGB(167, 102, 67)
@@ -129,7 +123,6 @@ local function buildUI()
     local padding = Instance.new("UIPadding", scroll)
     padding.PaddingTop = UDim.new(0, 10)
 
-    -- Toggle Button
     local toggleButton = Instance.new("TextButton", screenGui)
     toggleButton.Size = UDim2.new(0, 120, 0, 36)
     toggleButton.Position = UDim2.new(0, 14, 0, 14)
@@ -146,7 +139,6 @@ local function buildUI()
         canvasGroup.Visible = not canvasGroup.Visible
     end)
 
-    -- Final styling
     local finalCorner = Instance.new("UICorner")
     finalCorner.CornerRadius = UDim.new(0, 8)
     finalCorner.Parent = canvasGroup
@@ -156,14 +148,12 @@ local function buildUI()
     finalStroke.Thickness = 4.4
     finalStroke.Parent = canvasGroup
 
-    -- Rig
     local rig = workspace:FindFirstChild(player.Name.."_Fake") or workspace:FindFirstChild("CloneCharacter")
     if not rig then
-        warn("⚠️ No valid rig found.")
+        warn("No rig found to animate")
         return
     end
 
-    -- Create Dance Buttons
     for i, dance in ipairs(dances) do
         animations[i] = getgenv().Animator.new(rig, dance.id)
         animations[dance.name] = animations[i]
@@ -210,7 +200,7 @@ local function buildUI()
     end
 end
 
--- Startup
+--start
 repeat task.wait() until workspace:FindFirstChild(player.Name.."_Fake") or workspace:FindFirstChild("CloneCharacter")
 task.wait(1)
 restoreUI()
