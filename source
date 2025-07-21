@@ -85,6 +85,18 @@ local function buildUI()
         danceFrame.Visible = not danceFrame.Visible
     end)
 
+    local closebtn = Instane.new("TextButton", scroll)
+    closebtn.Size = UDim2.new(1, -10, 0, 22)
+    closebtn.BackgroundColor3 = Color3.fromRGB(200, 100, 100)
+    closebtn.Text = "Close"
+    closebtn.TextColor3 = Color3.new(1, 1, 1)
+    closebtn.Font = Enum.Font.SourceSansBold
+
+    closebtn.MouseButton1Click:Connect(function()
+       danceFrame.Visible = not danceFrame.Visible
+    end)
+    
+
     
     scroll.CanvasSize = UDim2.new(0, 0, 0, 48)
 
