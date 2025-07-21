@@ -12,6 +12,15 @@ local dances = {
     { name = "Boogie Down",     id = 16769959846,     sound = nil },
     { name = "Egypt",           id = 95986135548450,  sound = nil },
     { name = "Get Griddy",      id = 15704995372,     sound = nil },
+    { name = "Billie Jean",      id = 108805310510119,     sound = nil },
+    { name = "Happy Walk",      id = 124074233795203,     sound = nil },
+    { name = "Bumblebee",      id = 10048786578,     sound = nil },
+    { name = "Smooth Moves",      id = 77170841283499,     sound = nil },
+    { name = "That One Peashooter",      id = 15039779727,     sound = nil },
+    { name = "I WANNA RUNAWAY",      id = 119147810948063,     sound = nil },
+    { name = "Gambling Master (Hakari)",      id = 114322394064953,     sound = nil },
+    { name = "Slick Back",      id = 18986357892,     sound = nil },
+    { name = "YIPPIE",      id = 91260130273371,     sound = nil },
 }
 
 local animations = {}
