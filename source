@@ -8,7 +8,9 @@ local dances = {
     { name = "Chess (Rat Dance)", id = 104525136565640 },
     { name = "Gangnam Style", id = 12438774071 },
     { name = "Caramell Dansen", id = 103597509139287 },
-    { name = "Renegade", id = 5058884980 }
+    { name = "Boogie Down", id = 16769959846 },
+    { name = "Egypt", id =  95986135548450 },
+    { name = "Get Griddy", id = 15704995372 },
 }
 
 local animations = {}
