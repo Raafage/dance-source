@@ -5,16 +5,16 @@ local player = game.Players.LocalPlayer
 local savedUIs = {}
 
 local dances = {
-    { name = "Rat", id = 104525136565640 },
-    { name = "Slick", id = 16554002009 },
-    { name = "Griddy", id = 12887652370 },
+    { name = "Chess (Rat Dance)", id = 104525136565640 },
+    { name = "Gangnam Style", id = 12438774071 },
+    { name = "Caramell Dansen", id = 103597509139287 },
     { name = "Renegade", id = 5058884980 }
 }
 
 local animations = {}
 local currentTrack, currentDanceID
 
---Backup existing UI
+-- Backup existing UI
 local gui = player:WaitForChild("PlayerGui")
 for _, child in ipairs(gui:GetChildren()) do
     if child:IsA("ScreenGui") then
@@ -22,17 +22,17 @@ for _, child in ipairs(gui:GetChildren()) do
     end
 end
 
---Load reanimation
+-- Load reanimation
 task.spawn(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/somethingsimade/CurrentAngleV2/refs/heads/main/v2"))()
 end)
 
---Load Animator
+-- Load Animator
 if not getgenv().Animator then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/xhayper/Animator/main/Source/Main.lua"))()
 end
 
---Restore UI
+-- Restore UI
 local function restoreUI()
     local gui = player:WaitForChild("PlayerGui")
     for name, clone in pairs(savedUIs) do
@@ -42,7 +42,7 @@ local function restoreUI()
     end
 end
 
---Build dance elements
+-- Build Dance UI
 local function buildUI()
     local gui = player:WaitForChild("PlayerGui")
     if gui:FindFirstChild("DanceUI") then return end
@@ -51,7 +51,83 @@ local function buildUI()
     screenGui.Name = "DanceUI"
     screenGui.ResetOnSpawn = false
     screenGui.Parent = gui
+    screenGui.DisplayOrder = 999999999
 
+    -- Main Panel
+    local canvasGroup = Instance.new("Frame", screenGui)
+    canvasGroup.Size = UDim2.new(0, 240, 0, 340)
+    canvasGroup.Position = UDim2.new(0, 140, 0, 14)
+    canvasGroup.BackgroundColor3 = Color3.fromRGB(167, 102, 67)
+    canvasGroup.Active = true
+    canvasGroup.Visible = false
+    canvasGroup.Draggable = true
+    canvasGroup.ClipsDescendants = true
+    canvasGroup.BorderSizePixel = 0
+
+
+    local shadow = Instance.new("ImageLabel", canvasGroup)
+    shadow.AnchorPoint = Vector2.new(0.5, 0.5)
+    shadow.Position = UDim2.new(0.5, 0, 0.5, 0)
+    shadow.Size = UDim2.new(1.8, 0, 1.8, 0)
+    shadow.Image = "rbxassetid://8697780388"
+    shadow.ZIndex = 0
+
+    -- Top Bar
+    local topBar = Instance.new("Frame", canvasGroup)
+    topBar.Size = UDim2.new(1, 0, 0.272, 0)
+    topBar.Position = UDim2.new(0, 0, 0, 0)
+    topBar.BackgroundColor3 = Color3.fromRGB(8, 202, 6)
+    topBar.BorderSizePixel = 0
+    topBar.ZIndex = 1
+    local topCorner = Instance.new("UICorner", topBar)
+    topCorner.CornerRadius = UDim.new(0, 8)
+
+    -- Close Button
+    local closeBtn = Instance.new("TextButton", topBar)
+    closeBtn.Size = UDim2.new(0, 24, 0, 24)
+    closeBtn.Position = UDim2.new(0.879, 0, 0.013, 0)
+    closeBtn.Text = "X"
+    closeBtn.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+    closeBtn.TextColor3 = Color3.new(1, 1, 1)
+    closeBtn.Font = Enum.Font.SourceSansBold
+    closeBtn.TextSize = 14
+    closeBtn.ZIndex = 2
+    local closeCorner = Instance.new("UICorner", closeBtn)
+    closeCorner.CornerRadius = UDim.new(1, 0)
+    closeBtn.MouseButton1Click:Connect(function()
+        canvasGroup.Visible = false
+    end)
+
+    -- Decorative Bar
+    local decorBar = Instance.new("Frame", canvasGroup)
+    decorBar.Size = UDim2.new(0, 240, 0, 6)
+    decorBar.Position = UDim2.new(0, 0, 0.094, 0)
+    decorBar.BackgroundColor3 = Color3.fromRGB(128, 64, 29)
+    decorBar.BorderSizePixel = 0
+    decorBar.ZIndex = 2
+
+    -- Scroll Frame
+    local scroll = Instance.new("ScrollingFrame", canvasGroup)
+    scroll.BackgroundTransparency = 0
+    scroll.BackgroundColor3 = Color3.fromRGB(167, 102, 67)
+    scroll.Size = UDim2.new(0, 240, 0, 291)
+    scroll.Position = UDim2.new(-0, 0, 0.112, 0)
+    scroll.ScrollBarThickness = 4
+    scroll.ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0)
+    scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
+    scroll.BorderSizePixel = 0
+    scroll.Active = true
+   scroll.ScrollingDirection = Enum.ScrollingDirection.Y
+    scroll.ZIndex = 3
+
+    local layout = Instance.new("UIListLayout", scroll)
+    layout.Padding = UDim.new(0, 7)
+    layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+    local padding = Instance.new("UIPadding", scroll)
+    padding.PaddingTop = UDim.new(0, 10)
+
+    -- Toggle Button
     local toggleButton = Instance.new("TextButton", screenGui)
     toggleButton.Size = UDim2.new(0, 120, 0, 36)
     toggleButton.Position = UDim2.new(0, 14, 0, 14)
@@ -61,64 +137,58 @@ local function buildUI()
     toggleButton.Font = Enum.Font.SourceSansBold
     toggleButton.TextSize = 18
     toggleButton.Draggable = true
-
-    local danceFrame = Instance.new("Frame", screenGui)
-    danceFrame.Size = UDim2.new(0, 240, 0, 340)
-    danceFrame.Position = UDim2.new(0, 140, 0, 14)
-    danceFrame.BackgroundColor3 = Color3.fromRGB(220, 220, 220)
-    danceFrame.Visible = false
-    danceFrame.Active = true
-    danceFrame.Draggable = true
-
-    local scroll = Instance.new("ScrollingFrame", danceFrame)
-    scroll.Size = UDim2.new(1, 0, 1, 0)
-    scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
-    scroll.BackgroundTransparency = 1
-    scroll.ScrollBarThickness = 6
-    scroll.BorderSizePixel = 0
-    scroll.Active = true
-
-    local uilayout = Instance.new("UIListLayout", scroll)
-    uilayout.Padding = UDim.new(0, 0) -- Optional spacing between buttons
-
+    toggleButton.ZIndex = 4
+    local toggleCorner = Instance.new("UICorner", toggleButton)
+    toggleCorner.CornerRadius = UDim.new(0, 8)
     toggleButton.MouseButton1Click:Connect(function()
-        danceFrame.Visible = not danceFrame.Visible
+        canvasGroup.Visible = not canvasGroup.Visible
     end)
 
-    local closebtn = Instane.new("TextButton", scroll)
-    closebtn.Size = UDim2.new(1, -10, 0, 22)
-    closebtn.BackgroundColor3 = Color3.fromRGB(200, 100, 100)
-    closebtn.Text = "Close"
-    closebtn.TextColor3 = Color3.new(1, 1, 1)
-    closebtn.Font = Enum.Font.SourceSansBold
+    -- Final styling
+    local finalCorner = Instance.new("UICorner")
+    finalCorner.CornerRadius = UDim.new(0, 8)
+    finalCorner.Parent = canvasGroup
 
-    closebtn.MouseButton1Click:Connect(function()
-       danceFrame.Visible = not danceFrame.Visible
-    end)
-    
+    local finalStroke = Instance.new("UIStroke")
+    finalStroke.Color = Color3.fromRGB(78, 49, 27)
+    finalStroke.Thickness = 4.4
+    finalStroke.Parent = canvasGroup
 
-    
-    scroll.CanvasSize = UDim2.new(0, 0, 0, 48)
-
+    -- Rig
     local rig = workspace:FindFirstChild(player.Name.."_Fake") or workspace:FindFirstChild("CloneCharacter")
     if not rig then
         warn("⚠️ No valid rig found.")
         return
     end
 
-    --Create animations
+    -- Create Dance Buttons
     for i, dance in ipairs(dances) do
         animations[i] = getgenv().Animator.new(rig, dance.id)
-        animations[dance.name] = animations[i]  -- optional alias by name
+        animations[dance.name] = animations[i]
 
         local btn = Instance.new("TextButton", scroll)
-        btn.Size = UDim2.new(1, -10, 0, 44)
-        btn.Text = dance.name
-        btn.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
-        btn.TextColor3 = Color3.new(0, 0, 0)
-        btn.Font = Enum.Font.SourceSansBold
-        btn.TextSize = 16
-        scroll.CanvasSize = UDim2.new(0, 0, 0, (i + 1) * 48)
+        btn.Size = UDim2.new(0.9, 0, 0, 50)
+        btn.BackgroundColor3 = Color3.fromRGB(100, 35, 0)
+        btn.Text = ""
+        btn.ZIndex = 3
+
+        local btnCorner = Instance.new("UICorner", btn)
+        btnCorner.CornerRadius = UDim.new(0, 8)
+
+        local btnStroke = Instance.new("UIStroke", btn)
+        btnStroke.Color = Color3.fromRGB(128, 64, 29)
+        btnStroke.Thickness = 2.8
+        btnStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+        local label = Instance.new("TextLabel", btn)
+        label.Size = UDim2.new(1, 0, 0.5, 0)
+        label.Position = UDim2.new(0, 0, 0.24, 0)
+        label.Text = dance.name
+        label.Font = Enum.Font.SourceSansBold
+        label.TextColor3 = Color3.fromRGB(255, 255, 255)
+        label.TextScaled = true
+        label.BackgroundTransparency = 1
+        label.ZIndex = 4
 
         btn.MouseButton1Click:Connect(function()
             local animRef = animations[i]
@@ -129,9 +199,7 @@ local function buildUI()
                 currentTrack = nil
                 currentDanceID = nil
             else
-                if currentTrack then
-                    currentTrack:Stop()
-                end
+                if currentTrack then currentTrack:Stop() end
                 local track = animRef:Play()
                 currentTrack = animRef
                 currentDanceID = dance.id
@@ -140,12 +208,11 @@ local function buildUI()
     end
 end
 
-
+-- Startup
 repeat task.wait() until workspace:FindFirstChild(player.Name.."_Fake") or workspace:FindFirstChild("CloneCharacter")
 task.wait(1)
 restoreUI()
 buildUI()
-
 
 player.CharacterAdded:Connect(function()
     repeat task.wait() until workspace:FindFirstChild(player.Name.."_Fake") or workspace:FindFirstChild("CloneCharacter")
