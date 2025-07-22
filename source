@@ -40,7 +40,7 @@ end
 -- load reanimate
 task.spawn(function()
     loadstring(game:HttpGet(
-        "https://raw.githubusercontent.com/somethingsimade/CurrentAngleV2/refs/heads/main/v2"
+        "https://raw.githubusercontent.com/Raafage/dance-source/refs/heads/main/reanimatorig"
     ))()
 end)
 
