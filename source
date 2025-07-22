@@ -191,16 +191,18 @@ local function buildUI()
 
 
 	local txt = Instance.new("TextLabel", scroll)
-	txt.Size = UDim2.new(0.9, 0, 0, 15)
+	txt.Size = UDim2.new(0.9, 0, 0, 20)
 	txt.Font = Enum.Font.SourceSansBold
 	txt.BackgroundTransparency = 1
 	txt.Text = "Dance UI by TheRavenDev"
 	txt.TextColor3 = Color3.fromRGB(189, 134, 82)
+	txt.TextScaled = true
+	txt.ZIndex = 4
 
-	local btnStroke = Instance.new("UIStroke", txt)
-        btnStroke.Color         = Color3.fromRGB(128, 64, 29)
-        btnStroke.Thickness     = 1.8
-        btnStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+	local txtStroke = Instance.new("UIStroke", txt)
+        txtStroke.Color         = Color3.fromRGB(128, 64, 29)
+        txtStroke.Thickness     = 1.8
+        txtStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
 
 
     -- Rig detection
