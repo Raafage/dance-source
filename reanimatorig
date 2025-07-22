@@ -24,7 +24,12 @@ end
 local UI = (gethui and gethui()) or (cloneref and cloneref(game:GetService("CoreGui"))) or (pcall(function() return game:GetService("CoreGui").Parent end) and game:GetService("CoreGui")) or game:GetService("Players").LocalPlayer:FindFirstChildOfClass("PlayerGui")
 
 local function LoadUi(seconds)
-	 
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Re-animating character...";
+		Text = "Re-animator by MrY7zz";
+		Duration = 5; -- in seconds
+		Icon = ""; -- optional image URL or asset ID
+	})
 end
 
 local setsimulationradius = setsimulationradius
