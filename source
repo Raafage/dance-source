@@ -194,7 +194,7 @@ local function buildUI()
 	txt.Size = UDim2.new(0.9, 0, 0, 15)
 	txt.Font = Enum.Font.SourceSansBold
 	txt.BackgroundTransparency = 1
-	txt.Text = "Dance UI by TheRavenDev
+	txt.Text = "Dance UI by TheRavenDev"
 	txt.TextColor3 = Color3.fromRGB(189, 134, 82)
 
 	local btnStroke = Instance.new("UIStroke", txt)
