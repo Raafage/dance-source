@@ -18,7 +18,7 @@ local dances = {
     { name = "Smooth Moves",      id = 77170841283499,     sound = nil },
     { name = "That One Peashooter",      id = 15039779727,     sound = nil },
     { name = "I WANNA RUNAWAY",      id = 119147810948063,     sound = nil },
-    { name = "Gambling Master (Hakari)",      id = 114322394064953,     sound = nil },
+    { name = "Lonely",      id = 114322394064953,     sound = nil },
     { name = "Slick Back",      id = 18986357892,     sound = nil },
     { name = "YIPPIE",      id = 91260130273371,     sound = nil },
     { name = "The Honoured One",      id = 77149144728517,     sound = nil },
