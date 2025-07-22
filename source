@@ -189,6 +189,20 @@ local function buildUI()
     finalStroke.Color       = Color3.fromRGB(78, 49, 27)
     finalStroke.Thickness   = 4.4
 
+
+	local txt = Instance.new("TextLabel", scroll)
+	txt.Size = UDim2.new(0.9, 0, 0, 15)
+	txt.Font = Enum.Font.SourceSansBold
+	txt.BackgroundTransparency = 1
+	txt.Text = "Dance UI by TheRavenDev
+	txt.TextColor3 = Color3.fromRGB(189, 134, 82)
+
+	local btnStroke = Instance.new("UIStroke", txt)
+        btnStroke.Color         = Color3.fromRGB(128, 64, 29)
+        btnStroke.Thickness     = 1.8
+        btnStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+
+
     -- Rig detection
     local rig = workspace:FindFirstChild(player.Name.."_Fake")
                or workspace:FindFirstChild("CloneCharacter")
