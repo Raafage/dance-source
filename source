@@ -271,4 +271,11 @@ player.CharacterAdded:Connect(function()
     task.wait(1)
     restoreUI()
     buildUI()
+
+    game.StarterGui:SetCore("SendNotification", {
+	    Title = "Dance UI by TheRavenDev loaded!";
+	    Text = "Open the UI via the newly-added button on your client.";
+	    Duration = 5;
+	    Icon = "rbxassetid://82724486";
+    })
 end)
