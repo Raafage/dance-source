@@ -170,18 +170,13 @@ local function buildUI()
     padding.PaddingTop = UDim.new(0, 10)
 
     -- Toggle Button
-    local toggleButton = Instance.new("TextButton", screenGui)
-    toggleButton.Size            = UDim2.new(0, 120, 0, 36)
+    local toggleButton = Instance.new("ImageButton", screenGui)
+    toggleButton.Size            = UDim2.new(0, 50, 0, 50)
     toggleButton.Position        = UDim2.new(0, 14, 0, 14)
-    toggleButton.Text            = "Toggle Dance UI"
-    toggleButton.BackgroundColor3= Color3.fromRGB(80, 80, 200)
-    toggleButton.TextColor3      = Color3.new(1, 1, 1)
-    toggleButton.Font            = Enum.Font.SourceSansBold
-    toggleButton.TextSize        = 18
+    toggleButton.Image            = "rbxassetid://86229016270997"
+    toggleButton.BackgroundTransparency = 1
     toggleButton.Draggable       = true
     toggleButton.ZIndex          = 4
-    local toggleCorner = Instance.new("UICorner", toggleButton)
-    toggleCorner.CornerRadius     = UDim.new(0, 8)
     toggleButton.MouseButton1Click:Connect(function()
         canvasGroup.Visible = not canvasGroup.Visible
     end)
