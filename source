@@ -21,6 +21,9 @@ local dances = {
     { name = "Gambling Master (Hakari)",      id = 114322394064953,     sound = nil },
     { name = "Slick Back",      id = 18986357892,     sound = nil },
     { name = "YIPPIE",      id = 91260130273371,     sound = nil },
+    { name = "The Honoured One",      id = 77149144728517,     sound = nil },
+    { name = "Hollow Purple (200%)",      id = 112536589373736,     sound = nil },
+
 }
 
 local animations = {}
