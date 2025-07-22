@@ -272,6 +272,7 @@ player.CharacterAdded:Connect(function()
     restoreUI()
     buildUI()
 
+    task.wait(1)
     game.StarterGui:SetCore("SendNotification", {
 	    Title = "Dance UI by TheRavenDev loaded!";
 	    Text = "Open the UI via the newly-added button on your client.";
