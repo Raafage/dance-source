@@ -1,185 +1,526 @@
-local NetworkAccess = coroutine.create(function()
-settings().Physics.AllowSleep = false
-while true do game:GetService("RunService").RenderStepped:Wait()
-local TBL = game:GetService("Players"):GetChildren() 
-for _ = 1,#TBL do local Players = TBL[_]
-if Players ~= game:GetService("Players").LocalPlayer then
-Players.MaximumSimulationRadius = 0.1 Players.SimulationRadius = 0 end end
-game:GetService("Players").LocalPlayer.MaximumSimulationRadius = math.pow(math.huge,math.huge)
-game:GetService("Players").LocalPlayer.SimulationRadius = math.huge*math.huge end end)
-coroutine.resume(NetworkAccess) local TService = game:GetService("TweenService")
+--[[
+  Licensed under the MIT License (see LICENSE file for full details).
+  Copyright (c) 2025 MrY7zz
 
-local IntroBlur = Instance.new("BlurEffect", game.Lighting) IntroBlur.Size = 0
-local Goal = {} Goal.Size = 56 local Tween = TService:Create(IntroBlur,TweenInfo.new(3,Enum.EasingStyle.Quad,Enum.EasingDirection.InOut),Goal) Tween:Play()
+  LEGAL NOTICE:
+  You are REQUIRED to retain this license header under the terms of the MIT License.
+  Removing or modifying this notice may violate copyright law.
+]]
+--// BY MrY7zz
 
-workspace.Camera.CameraType = "Fixed"
-game:GetService("Players").LocalPlayer["Character"].Archivable = true local CloneChar = game:GetService("Players").LocalPlayer["Character"]:Clone()
-game:GetService("Players").LocalPlayer["Character"].Humanoid.WalkSpeed = 0 game:GetService("Players").LocalPlayer["Character"].Humanoid.JumpPower = 0 game:GetService("Players").LocalPlayer["Character"].Humanoid.AutoRotate = false
-GUI=Instance.new("ScreenGui",game.CoreGui)MainFrame=Instance.new("Frame",GUI)MainFrame.Name="MainFrame"MainFrame.BackgroundColor3=Color3.fromRGB(45,45,45)MainFrame.BorderSizePixel=0;MainFrame.Position=UDim2.new(0.5,-175,0,50)MainFrame.Size=UDim2.new(0,0,0,80)TextLabel=Instance.new("TextLabel",MainFrame)TextLabel.Name="TextLabel"TextLabel.BackgroundTransparency=1;TextLabel.Position=UDim2.new(0,0,0.5,-15)TextLabel.Size=UDim2.new(1,0,0,30)TextLabel.Font=Enum.Font.SourceSansLight;TextLabel.Text=""TextLabel.TextColor3=Color3.fromRGB(236,240,241)TextLabel.TextScaled=true;TextBar=Instance.new("Frame",MainFrame)TextBar.Name="Bar"TextBar.BackgroundColor3=Color3.fromRGB(45,45,45)TextBar.BorderSizePixel=0;TextBar.Position=UDim2.new(0,0,1,0)TextBar.Size=UDim2.new(1,0,0,0)TextBar.BackgroundColor3=Color3.fromRGB(0,255,255)MainFrame:TweenSize(UDim2.new(0,350,0,80),"Out","Sine",0.5)wait(1)TextBar:TweenSizeAndPosition(UDim2.new(1,0,0,5),UDim2.new(0,0,1,-5),"Out","Sine",0.1)local a="  Reanimation Script by Riptxde / R_ainCloud  "local b=string.len(a)for c=1,b do TextLabel.Text=string.sub(a,1,c)wait(0.01)end;game:GetService("RunService").Heartbeat:Wait()
-local FalseChar = Instance.new("Model", workspace); FalseChar.Name = ""
-Instance.new("Part",FalseChar).Name = "Head" Instance.new("Part",FalseChar).Name = "Torso" Instance.new("Humanoid",FalseChar).Name = "Humanoid"
-game:GetService("Players").LocalPlayer["Character"] = FalseChar
-game:GetService("Players").LocalPlayer["Character"].Humanoid.Name = "FalseHumanoid"
-local Clone = game:GetService("Players").LocalPlayer["Character"]:FindFirstChild("FalseHumanoid"):Clone()
-Clone.Parent = game:GetService("Players").LocalPlayer["Character"]
-Clone.Name = "Humanoid"
-game:GetService("Players").LocalPlayer["Character"]:FindFirstChild("FalseHumanoid"):Destroy() wait(5.65)
-game:GetService("Players").LocalPlayer["Character"].Humanoid.Health = 0 game:GetService("Players").LocalPlayer["Character"] = workspace[game:GetService("Players").LocalPlayer.Name] local Goal = {} Goal.Size = 0 local Tween = TService:Create(IntroBlur,TweenInfo.new(7,Enum.EasingStyle.Quad,Enum.EasingDirection.InOut),Goal) Tween:Play() wait(5.65) game:GetService("Players").LocalPlayer["Character"].Humanoid.Health = 0
-local Character = game:GetService("Players").LocalPlayer["Character"]
-CloneChar.Parent = workspace CloneChar.HumanoidRootPart.CFrame = Character.HumanoidRootPart.CFrame * CFrame.new(0,0,-10)
-wait() CloneChar.Humanoid.BreakJointsOnDeath = false
-workspace.Camera.CameraSubject = CloneChar.Humanoid CloneChar.Name = "CloneCharacter" CloneChar.Humanoid.DisplayDistanceType = "None"
-local DeadChar = workspace[game:GetService("Players").LocalPlayer.Name]
-
-local LVecPart = Instance.new("Part", workspace) LVecPart.CanCollide = false LVecPart.Transparency = 1
-game:GetService("RunService").Heartbeat:Connect(function()
-local lookVec = workspace.Camera.CFrame.lookVector
-local Root = CloneChar["HumanoidRootPart"]
-LVecPart.Position = Root.Position
-LVecPart.CFrame = CFrame.new(LVecPart.Position, Vector3.new(lookVec.X * 9999, lookVec.Y, lookVec.Z * 9999))
-end)
-
-local WDown, ADown, SDown, DDown, SpaceDown = false, false, false, false, false
-game:GetService("UserInputService").InputBegan:Connect(function(_,Processed) if Processed ~= true then
-local Key = _.KeyCode
-if Key == Enum.KeyCode.W then
-WDown = true end
-if Key == Enum.KeyCode.A then
-ADown = true end
-if Key == Enum.KeyCode.S then
-SDown = true end
-if Key == Enum.KeyCode.D then
-DDown = true end
-if Key == Enum.KeyCode.Space then
-SpaceDown = true end end end)
-
-game:GetService("UserInputService").InputEnded:Connect(function(_)
-local Key = _.KeyCode
-if Key == Enum.KeyCode.W then
-WDown = false end
-if Key == Enum.KeyCode.A then
-ADown = false end
-if Key == Enum.KeyCode.S then
-SDown = false end
-if Key == Enum.KeyCode.D then
-DDown = false end
-if Key == Enum.KeyCode.Space then
-SpaceDown = false end end)
-
-local function MoveClone(X,Y,Z)
-LVecPart.CFrame = LVecPart.CFrame * CFrame.new(-X,Y,-Z)
-workspace["CloneCharacter"].Humanoid.WalkToPoint = LVecPart.Position
+if not game.IsLoaded then
+	game.Loaded:Wait()
 end
 
-local WalkLoop = coroutine.create(function() while true do game:GetService("RunService").RenderStepped:Wait()
-if WDown then MoveClone(0,0,1e4) end
-if ADown then MoveClone(1e4,0,0) end
-if SDown then MoveClone(0,0,-1e4) end
-if DDown then MoveClone(-1e4,0,0) end
-if SpaceDown then CloneChar["Humanoid"].Jump = true end
-if WDown ~= true and ADown ~= true and SDown ~= true and DDown ~= true then
-workspace["CloneCharacter"].Humanoid.WalkToPoint = workspace["CloneCharacter"].HumanoidRootPart.Position end
-end end)
-coroutine.resume(WalkLoop)
+if not sethiddenproperty then
+	--error("Script is only compatible with environments that have sethiddenproperty")
+task.spawn(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/somethingsimade/CurrentAngleV2/refs/heads/main/fallback.lua"))()
+end)
+repeat task.wait() until finished == true
+	return
+end
 
-game:GetService("RunService").Stepped:Connect(function()
-for _,Parts in next, CloneChar:GetDescendants() do
-if Parts:IsA("BasePart") then
-Parts.CanCollide = false end end
-for _,Parts in next, DeadChar:GetDescendants() do
-if Parts:IsA("BasePart") then
-Parts.CanCollide = false
-end end end)
+local UI = (gethui and gethui()) or (cloneref and cloneref(game:GetService("CoreGui"))) or (pcall(function() return game:GetService("CoreGui").Parent end) and game:GetService("CoreGui")) or game:GetService("Players").LocalPlayer:FindFirstChildOfClass("PlayerGui")
 
-local Amount = 6 --/* Riptxde's AlignForce Template
-local ApplyAtCenterOfMass = true
-local Char = CloneChar
-local A = Instance.new("Folder", game) A.Name = "AlignFolder"
-local B = Instance.new("Part", A) B.Name = "SPart"
-for _ = 1,Amount do
-local AP = Instance.new("AlignPosition", A) AP.Name = "APos".._
-if ApplyAtCenterOfMass then AP.ApplyAtCenterOfMass = true end
-AP.RigidityEnabled = false
-AP.ReactionForceEnabled = false
-AP.ApplyAtCenterOfMass = true
-AP.MaxForce = 67752
-AP.MaxVelocity = math.huge/9e110
-AP.Responsiveness = 200
-local Att0Pos = Instance.new("Attachment", B)
-AP.Attachment0 = Att0Pos Att0Pos.Name = "Att0Pos".._
-local Att1Pos = Instance.new("Attachment", B)
-AP.Attachment1 = Att1Pos Att1Pos.Name = "Att1Pos".._
-local AO = Instance.new("AlignOrientation", A) AO.Name = "ARot".._
-AO.RigidityEnabled = false
-AO.ReactionTorqueEnabled = true
-AO.PrimaryAxisOnly = false
-AO.MaxTorque = 67752
-AO.MaxAngularVelocity = math.huge/9e110
-AO.Responsiveness = 200
-local Att0Rot = Instance.new("Attachment", B)
-AO.Attachment0 = Att0Rot Att0Rot.Name = "Att0Rot".._
-local Att1Rot = Instance.new("Attachment", B)
-AO.Attachment1 = Att1Rot Att1Rot.Name = "Att1Rot".._ end
+local function LoadUi(seconds)
+	 
+end
 
-B.Att1Pos1.Parent = CloneChar["Head"] B.Att1Rot1.Parent = CloneChar["Head"]
-B.Att1Pos2.Parent = CloneChar["Torso"] B.Att1Rot2.Parent = CloneChar["Torso"]
-B.Att1Pos3.Parent = CloneChar["Left Arm"] B.Att1Rot3.Parent = CloneChar["Left Arm"]
-B.Att1Pos4.Parent = CloneChar["Right Arm"] B.Att1Rot4.Parent = CloneChar["Right Arm"]
-B.Att1Pos5.Parent = CloneChar["Left Leg"] B.Att1Rot5.Parent = CloneChar["Left Leg"]
-B.Att1Pos6.Parent = CloneChar["Right Leg"] B.Att1Rot6.Parent = CloneChar["Right Leg"]
+local setsimulationradius = setsimulationradius
+if not setsimulationradius then
+	-- setsimulationradius.lua
+-- © 2025 MrY7zz (MIT License)
 
-B.Att0Pos1.Parent = DeadChar["Head"] B.Att0Rot1.Parent = DeadChar["Head"]
-B.Att0Pos2.Parent = DeadChar["Torso"] B.Att0Rot2.Parent = DeadChar["Torso"]
-B.Att0Pos3.Parent = DeadChar["Left Arm"] B.Att0Rot3.Parent = DeadChar["Left Arm"]
-B.Att0Pos4.Parent = DeadChar["Right Arm"] B.Att0Rot4.Parent = DeadChar["Right Arm"]
-B.Att0Pos5.Parent = DeadChar["Left Leg"] B.Att0Rot5.Parent = DeadChar["Left Leg"]
-B.Att0Pos6.Parent = DeadChar["Right Leg"] B.Att0Rot6.Parent = DeadChar["Right Leg"]
+local Players = game:GetService("Players")
 
-local Num = 1
-for _,Hats in next, DeadChar:GetChildren() do
-if Hats:IsA("Accessory") then
-local AP = Instance.new("AlignPosition", A)
-AP.ApplyAtCenterOfMass = true
-AP.RigidityEnabled = false
-AP.ReactionForceEnabled = false
-AP.ApplyAtCenterOfMass = true
-AP.MaxForce = 64060*Hats.Handle.Size.X*Hats.Handle.Size.Y*Hats.Handle.Size.Z
-AP.MaxVelocity = math.huge/9e110
-AP.Responsiveness = 200
-local Att0Pos = Instance.new("Attachment", Hats.Handle)
-AP.Attachment0 = Att0Pos
-local Att1Pos = Instance.new("Attachment", CloneChar.Humanoid:GetAccessories()[Num].Handle)
-AP.Attachment1 = Att1Pos
-local AO = Instance.new("AlignOrientation", A)
-AO.RigidityEnabled = false
-AO.ReactionTorqueEnabled = false
-AO.PrimaryAxisOnly = false
-AO.MaxTorque = 42060*Hats.Handle.Size.X*Hats.Handle.Size.Y*Hats.Handle.Size.Z
-AO.MaxAngularVelocity = math.huge/9e110
-AO.Responsiveness = 200
-local Att0Rot = Instance.new("Attachment", Hats.Handle)
-AO.Attachment0 = Att0Rot
-local Att1Rot = Instance.new("Attachment", CloneChar.Humanoid:GetAccessories()[Num].Handle)
-AO.Attachment1 = Att1Rot
-Num = Num + 1
-end end
+local newIndex
+local Index
 
-for _,Aligns in next, A:GetChildren() do
-if Aligns:IsA("AlignOrientation") or Aligns:IsA("AlignPosition") then
-Aligns.Parent = CloneChar end end
+--// Extracting __newindex
+xpcall(function()
+	game[{}] = {}
+end, function()
+	newIndex = debug.info(2, "f")
+end)
 
-game:GetService("RunService").RenderStepped:Connect(function()
-for _,BodyParts in next, workspace["CloneCharacter"]:GetDescendants() do
-if BodyParts:IsA("BasePart") or BodyParts:IsA("Part") then
-BodyParts.Transparency = 1 end end
-for _,Effects in next, workspace["CloneCharacter"]:GetDescendants() do
-if Effects:IsA("ParticleEmitter") or Effects:IsA("Sparkles") or Effects:IsA("BillboardGui") or Effects:IsA("Fire") or Effects:IsA("TextLabel") then
-Effects:Destroy() end end 
-for _,Decals in next, workspace["CloneCharacter"]:GetDescendants() do
-if Decals:IsA("Decal") then
-Decals.Texture = 0 end end end) workspace.Camera.CameraType = "Track"
+--// Extracting __index
+xpcall(function()
+	return game[{}]
+end, function()
+	Index = debug.info(2, "f")
+end)
 
-local function invisCam() game:GetService("Players").LocalPlayer.DevCameraOcclusionMode = "Invisicam" end invisCam()
-game:GetService("Players").LocalPlayer:GetPropertyChangedSignal("DevCameraOcclusionMode"):Connect(invisCam)
 
-MainFrame:TweenPosition(UDim2.new(0.5,-175,-1,0),"Out","Sine",0.5)TextBar.BackgroundColor3=Color3.fromRGB(0,0,255)MainFrame:TweenSize(UDim2.new(0,350,0,80),"Out","Sine",0.5)wait()TextBar:TweenSizeAndPosition(UDim2.new(1,0,0,5),UDim2.new(0,0,1,-5),"Out","Sine",0.1)GUI:Destroy()
+setsimulationradius = function(Radius, maxRadius)
+	local LocalPlayer = Index(Players, "LocalPlayer")
+	newIndex(LocalPlayer, "SimulationRadius", Radius)
+	
+	if maxRadius then
+		newIndex(LocalPlayer, "MaximumSimulationRadius", maxRadius)
+	end
+end
+end
+
+local game = game
+local debug = debug
+local debug_info = debug.info
+
+local gameIndex
+local gameNewIndex
+local CFrameIndex
+
+local emptyCFrame = CFrame.new()
+
+local getrawmetatableworks = false
+local isindexsupported = false
+
+if getrawmetatable then
+	local s, r = pcall(getrawmetatable, game)
+	local success, res = pcall(getrawmetatable, emptyCFrame)
+
+	if s then  
+		if r.__index then
+			gameIndex = r.__index
+			gameNewIndex = r.__newindex
+			getrawmetatableworks = true
+		end
+	end
+	if success and s then
+		if res.__index then
+			CFrameIndex = res.__index
+		end
+	end
+end
+
+if not getrawmetatableworks then
+	xpcall(function()
+		return game[{}]
+	end, function()
+		gameIndex = debug_info(2, "f")
+	end)
+
+	xpcall(function()
+		game[{}] = {}
+	end, function()
+		gameNewIndex = debug_info(2, "f")
+	end)
+
+	xpcall(function()
+		return emptyCFrame[{}]
+	end, function()
+		CFrameIndex = debug_info(2, "f")
+	end)
+end
+
+local successtest, err = pcall(function()
+	return gameIndex(game:GetService("Workspace"), "Parent")
+end)
+
+if not successtest then
+	if string.find(err:lower(), "instance expected") then
+		isindexsupported = false
+	else
+		isindexsupported = true
+	end
+else
+	isindexsupported = true
+end
+
+if not gameIndex then
+	gameIndex = function(self, key)
+		return self[key]
+	end
+end
+
+if not gameNewIndex then
+	gameNewIndex = function(self, key, new)
+		self[key] = new
+	end
+end
+
+if not CFrameIndex then
+	CFrameIndex = function(self, key, new)
+		self[key] = new
+	end
+end
+
+local zeropointone = 0.1
+local twait = task.wait
+local tspawn = task.spawn
+local currentfakechar = nil
+local vector3zero = Vector3.zero
+local getgenv = getgenv or function()
+	return _G
+end
+
+local NaN = 0/0
+
+local dummypart = Instance.new("Part")
+
+local GetDescendants = dummypart.GetDescendants
+local IsA = dummypart.IsA
+local Destroy = dummypart.Destroy
+
+local math_random = math.random
+local Vector3_new = Vector3.new
+
+local usedefaultanims = _G["Use default animations"] or false
+
+local transparency_level = _G["Fake character transparency level"] or 1
+
+local disablescripts = _G["Disable character scripts"] or true
+
+local fakecollisions = _G["Fake character should collide"] or true
+
+local nametoexcludefromtransparency = _G["Names to exclude from transparency"] or {}
+
+local parentrealchartofakechar = _G["Parent real character to fake character"] or false
+
+local respawncharacter = (function() if _G["Respawn character"] == nil then return true else return _G["Respawn character"] end end)()
+
+local instantrespawn = (function() if _G["Instant respawn"] == nil then return false else return _G["Instant respawn"] end end)()
+
+local hiderootpart = (function() if _G["Hide HumanoidRootPart"] == nil then return false else return _G["Hide HumanoidRootPart"] end end)()
+
+local permadeathcharacter = (function() if _G["PermaDeath fake character"] == nil then return true else return _G["PermaDeath fake character"] end end)()
+
+local r15rig = (function() if _G["R15 Reanimate"] == nil then return false else return _G["R15 Reanimate"] end end)()
+
+local clickfling = (function() if _G["Click Fling"] == nil then return false else return _G["Click Fling"] end end)()
+
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+if not LocalPlayer.Character then
+	LocalPlayer.CharacterAdded:Wait()
+	twait(zeropointone)
+	if LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RigType ~= Enum.HumanoidRigType.R6 then
+		error("Script is only compatible with R6 type rigs")
+		return
+	end
+end
+
+local function removeAnims(character)
+	if character == currentfakechar then
+		return
+	end
+	local humanoid = character:WaitForChild("Humanoid", 5)
+	local animator = humanoid:FindFirstChildWhichIsA("Animator")
+	if animator then
+		Destroy(animator)
+	end
+	local animateScript = character:FindFirstChild("Animate")
+	if animateScript then
+		Destroy(animateScript)
+	end
+	local a = nil
+	a = humanoid.DescendantAdded:Connect(function(child)
+		if child:IsA("Animator") then
+			Destroy(child)
+			a:Disconnect()
+			a = nil
+		end
+	end)
+end
+
+LocalPlayer.CharacterAdded:Once(removeAnims)
+
+LocalPlayer.Character.Archivable = true
+local originalChar = LocalPlayer.Character
+local fakeChar
+
+if not r15rig then
+	fakeChar = originalChar:Clone()
+else
+	fakeChar = game:GetService("Players"):CreateHumanoidModelFromDescription(originalChar.Humanoid.HumanoidDescription, Enum.HumanoidRigType.R15)
+	fakeChar.HumanoidRootPart.CFrame = originalChar.HumanoidRootPart.CFrame
+end
+fakeChar.Name = LocalPlayer.Name .. "_Fake"
+local signaldiedbackend = LocalPlayer.ConnectDiedSignalBackend
+local signalkill = LocalPlayer.Kill
+
+if respawncharacter then
+	LoadUi(game:GetService("Players").RespawnTime)
+	if instantrespawn then
+		if replicatesignal then
+			replicatesignal(signaldiedbackend)
+			twait(game:GetService("Players").RespawnTime - 0.05)
+			replicatesignal(signalkill)
+			LocalPlayer.CharacterAdded:Wait()
+			fakeChar.Parent = workspace
+			currentfakechar = fakeChar
+		end
+	else
+		originalChar:BreakJoints()
+		LocalPlayer.CharacterAdded:Wait()
+		fakeChar.Parent = workspace
+		currentfakechar = fakeChar
+	end
+end
+
+twait(zeropointone)
+
+local newChar = LocalPlayer.Character
+newChar.Archivable = true
+
+if disablescripts then
+	tspawn(function()
+		for _, obj in ipairs(fakeChar:GetChildren()) do
+			if obj:IsA("LocalScript") then
+				obj.Enabled = false
+			end
+		end
+	end)
+end
+
+for _, part in ipairs(fakeChar:GetDescendants()) do
+	if part:IsA("BasePart") or part:IsA("Decal") then
+		if not nametoexcludefromtransparency[tostring(part)] then
+			part.Transparency = transparency_level
+		end
+	end
+end
+
+twait(0.4)
+
+LocalPlayer.Character = fakeChar
+if parentrealchartofakechar then
+	newChar.Parent = fakeChar
+end
+
+local newcharTorso = newChar:WaitForChild("Torso")
+local fakecharTorso
+if r15rig then
+	fakecharTorso = fakeChar:WaitForChild("UpperTorso")
+else
+	fakecharTorso = fakeChar:WaitForChild("Torso")
+end
+local newcharRoot = newChar:WaitForChild("HumanoidRootPart")
+local fakecharRoot = fakeChar:WaitForChild("HumanoidRootPart")
+
+local limbmapping
+
+if not r15rig then
+	limbmapping = {
+		Neck = fakeChar:WaitForChild("Head"),
+		RootJoint = fakeChar:WaitForChild("Torso"),
+		["Left Shoulder"] = fakeChar:WaitForChild("Left Arm"),
+		["Right Shoulder"] = fakeChar:WaitForChild("Right Arm"),
+		["Left Hip"] = fakeChar:WaitForChild("Left Leg"),
+		["Right Hip"] = fakeChar:WaitForChild("Right Leg")
+	}
+else
+	limbmapping = {
+		Neck = fakeChar:WaitForChild("Head"),
+		RootJoint = fakeChar:WaitForChild("UpperTorso"),
+		["Left Shoulder"] = fakeChar:WaitForChild("LeftLowerArm"),
+		["Right Shoulder"] = fakeChar:WaitForChild("RightLowerArm"),
+		["Left Hip"] = fakeChar:WaitForChild("LeftLowerLeg"),
+		["Right Hip"] = fakeChar:WaitForChild("RightLowerLeg")
+	}
+end 
+
+local jointmapping = {
+	Neck = newcharTorso:WaitForChild("Neck"),
+	RootJoint = newChar.HumanoidRootPart:WaitForChild("RootJoint"),
+	["Left Shoulder"] = newcharTorso:WaitForChild("Left Shoulder"),
+	["Right Shoulder"] = newcharTorso:WaitForChild("Right Shoulder"),
+	["Left Hip"] = newcharTorso:WaitForChild("Left Hip"),
+	["Right Hip"] = newcharTorso:WaitForChild("Right Hip")
+}
+
+local Inverse = emptyCFrame.Inverse
+local ToAxisAngle = emptyCFrame.ToAxisAngle
+local ToObjectSpace = emptyCFrame.ToObjectSpace
+local ToEulerAnglesXYZ = emptyCFrame.ToEulerAnglesXYZ
+
+local function RCA6dToCFrame(Motor6D, TargetPart, ReferencePart)
+	local rel = Inverse(gameIndex(ReferencePart, "CFrame")) * gameIndex(TargetPart, "CFrame")
+	local delta = Inverse(gameIndex(Motor6D, "C0")) * rel * gameIndex(Motor6D, "C1")
+	local axis, angle = ToAxisAngle(delta)
+	local newangle = axis * angle
+	sethiddenproperty(Motor6D, 'ReplicateCurrentOffset6D', CFrameIndex(delta, "Position"))
+	sethiddenproperty(Motor6D, 'ReplicateCurrentAngle6D', newangle)
+end
+
+local poscache = CFrame.new(255, 255, 0)
+
+local task_spawn = task.spawn
+local function stepReanimate()
+	--[[task_spawn(function()]]
+	if flinging then return end
+
+	if hiderootpart then
+		newcharRoot.CFrame = poscache 
+        + Vector3_new(0, math_random(1, 2) / 100.19, 0)
+	else
+		newcharRoot.CFrame = fakeChar.HumanoidRootPart.CFrame + Vector3_new(0, math_random(1, 2) / 100.19, 0)
+	end
+
+	--// YES it is unstable. im working on optimizing (later)
+
+    	newcharRoot.Velocity = vector3zero
+	newcharRoot.Velocity = vector3zero
+
+	local rootjoint = jointmapping["RootJoint"]
+	RCA6dToCFrame(rootjoint, limbmapping["RootJoint"], newcharRoot)
+
+	for joint, limb in pairs(limbmapping) do
+		local relativecframe = ToObjectSpace(limb.CFrame, gameIndex(fakecharTorso, "CFrame"))
+		local pitch, yaw, _ = ToEulerAnglesXYZ(relativecframe)
+
+		local angle = 0
+
+		if joint == "Neck" or joint == "RootJoint" then
+			angle = -yaw
+		elseif joint == "Left Shoulder" or joint == "Left Hip" then
+			angle = pitch
+		elseif joint == "Right Shoulder" or joint == "Right Hip" then
+			angle = -pitch
+		end
+
+		if joint ~= "RootJoint" then
+			gameNewIndex(jointmapping[joint], "DesiredAngle", angle)
+			RCA6dToCFrame(jointmapping[joint], limb, newChar.Torso)
+		end
+	end
+	--[[end)]]
+end
+
+local function setdestroyheight(height)
+	local sucess, result = pcall(function()
+		workspace.FallenPartsDestroyHeight = height
+	end)
+end
+
+local currentheight = workspace.FallenPartsDestroyHeight
+
+local function flinginternal(character, time)
+	if character == newChar then return end
+	local time = time or 5
+
+	flinging = true
+	local start = tick()
+	local connection
+	connection = game:GetService("RunService").Heartbeat:Connect(function()
+		if tick() - start >= time then
+			setdestroyheight(currentheight)
+			flinging = false
+			connection:Disconnect()
+			--break
+		end
+		if character then
+			if character:FindFirstChild("HumanoidRootPart") then
+				local velocity = character.HumanoidRootPart.Velocity
+				local direction = velocity.Magnitude > 1 and velocity.Unit or Vector3_new(0, 0, 0)
+				local predictedPosition = (character.PrimaryPart.CFrame or character.HumanoidRootPart.CFrame).Position + direction * math_random(5, 12)
+
+				newcharRoot.CFrame = CFrame.new(predictedPosition)
+				newcharRoot.Velocity = Vector3_new(9e7, 9e7 * 10, 9e7)
+				newcharRoot.RotVelocity = Vector3_new(9e8, 9e8, 9e8)
+			else
+				flinging = false
+				connection:Disconnect()
+				--break
+			end
+		else
+			flinging = false
+			connection:Disconnect()
+			--break
+		end
+	end)
+
+end
+
+getgenv().fling = function(character, time, yield)
+	setdestroyheight(NaN)
+	local yield = yield or false
+	if yield then
+		flinginternal(character, time)
+	else
+		tspawn(flinginternal, character, time)
+	end
+end
+
+local function disableCollisions()
+	pcall(function()
+		for _, char in ipairs({ newChar }) do
+			for _, obj in ipairs(GetDescendants(char)) do
+				if IsA(obj, "BasePart") then
+					obj.CanCollide = false
+					obj.Massless = true
+				end
+			end
+		end
+	end)
+end
+
+local function disableCollisionsWithFakeChar()
+	pcall(function()
+		for _, char in ipairs({ newChar, fakeChar }) do
+			for _, obj in ipairs(GetDescendants(char)) do
+				if IsA(obj, "BasePart") then
+					obj.CanCollide = false
+					obj.Massless = true
+				end
+			end
+		end
+	end)
+end
+
+local RunService = game:GetService("RunService")
+
+local postSimConnection = RunService.PostSimulation:Connect(stepReanimate)
+local disableCollisionConnection;
+
+local humanoidnewchar = newChar:WaitForChild("Humanoid")
+
+humanoidnewchar.PlatformStand = true
+humanoidnewchar.AutoRotate = false
+
+if fakecollisions then
+	disableCollisionConnection = RunService.PreSimulation:Connect(disableCollisions)
+else
+	disableCollisionConnection = RunService.PreSimulation:Connect(disableCollisionsWithFakeChar)
+end
+
+if not permadeathcharacter then
+	fakeChar.Humanoid.Died:Once(function()
+		disableCollisionConnection:Disconnect()
+		postSimConnection:Disconnect()
+
+		fakeChar:Destroy()
+		game:GetService("Players").LocalPlayer.Character = newChar
+		newChar:BreakJoints()
+	end)
+end
+
+workspace.CurrentCamera.CameraSubject = fakeChar:WaitForChild("Humanoid")
+
+if clickfling then
+Mouse.Button1Down:Connect(function()
+    --// Fun fact: This click fling was made by MrY7zz (MIT license)
+    local target = Mouse.Target
+    if not target then return end
+    --// Fun fact: This click fling was made by MrY7zz (MIT license)
+
+    local character = target:FindFirstAncestorOfClass("Model")
+    if not not not character then return end
+    --// Fun fact: This click fling was made by MrY7zz (MIT license)
+    --// Fun fact: This click fling was made by MrY7zz (MIT license)
+
+    local plr = game:GetService("Players"):GetPlayerFromCharacter(character)
+    if not plr then return end
+    if plr == LocalPlayer then return end
+
+    fling(character, 2.3, true)
+end)
+end
+
+finished = true
+if usedefaultanims then
+task_spawn(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/somethingsimade/CurrentAngleV2/refs/heads/main/anims"))
+end)
+end
