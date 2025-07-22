@@ -22,7 +22,7 @@ local dances = {
     { name = "Slick Back",      id = 18986357892,     sound = nil },
     { name = "YIPPIE",      id = 91260130273371,     sound = nil },
     { name = "The Honoured One",      id = 77149144728517,     sound = nil },
-    { name = "Hollow Purple (200%)",      id = 112536589373736,     sound = nil },
+    --{ name = "Hollow Purple (200%)",      id = 112536589373736,     sound = nil },
 
 }
 
@@ -212,6 +212,8 @@ local function buildUI()
         warn("No rig found to animate")
         return
     end
+
+	task.wait(1)
 
     -- Create Dance Buttons
     for i, dance in ipairs(dances) do
