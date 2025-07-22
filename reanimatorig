@@ -27,8 +27,8 @@ local function LoadUi(seconds)
 	game.StarterGui:SetCore("SendNotification", {
 		Title = "Re-animating character...";
 		Text = "Re-animator by MrY7zz";
-		Duration = 5; -- in seconds
-		Icon = ""; -- optional image URL or asset ID
+		Duration = 5;
+		Icon = "";
 	})
 end
 
